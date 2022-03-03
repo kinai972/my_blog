@@ -45,6 +45,15 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllWithComments(): array
+    {
+        return $this->createQueryBuilder("p")
+        ->addSelect("c")
+        ->join("p.comments", "c")
+        ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
