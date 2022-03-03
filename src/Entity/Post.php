@@ -22,6 +22,11 @@ class Post
     #[ORM\Column(type: 'text')]
     private $content;
 
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

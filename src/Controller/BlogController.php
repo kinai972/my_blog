@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class HomeController extends AbstractController
+class BlogController extends AbstractController
 {
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(PostRepository $repository): Response
     {
-        return $this->render("index.html.twig");
+        $posts = $repository->findAll();
+        return $this->render("index.html.twig", [
+            "posts" => $posts,
+        ]);
     }
 }
