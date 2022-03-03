@@ -19,10 +19,10 @@ class PostFixtures extends Fixture
             $post->setContent("Contenu N° $i");
             $manager->persist($post);
 
-            for ($j = 0; $j < rand(5, 15); $j++) {
+            for ($j = 1; $j < rand(5, 15); $j++) {
                 $comment = new Comment();
                 $comment->setAuthor("Auteur $i");
-                $comment->setContent("Commentaire N° $i");
+                $comment->setContent("Commentaire N° $j");
                 $comment->setPost($post);
                 $manager->persist($comment);
             }
