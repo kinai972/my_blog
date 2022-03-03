@@ -45,11 +45,13 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllWithComments(): array
+    public function findByPagination(int $page, int $limit): array
     {
         return $this->createQueryBuilder("p")
-        ->addSelect("c")
-        ->join("p.comments", "c")
+            // ->addSelect("c")
+            // ->join("p.comments", "c")
+            ->setMaxResults($limit)
+            ->setFirstResult(($page - 1) * $limit)
         ->getQuery()
             ->getResult();
     }
